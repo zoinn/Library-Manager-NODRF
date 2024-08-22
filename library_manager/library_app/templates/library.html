@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Library</title>
+    <ul>
+        <li><a href="{% url 'library' %}">Library</a></li>
+        <li><a href="{% url 'member' %}">Members</a></li>
+        <!-- Uses a form to logout, as we need to do a POST to logout -->
+        <li>
+            <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+            </form>
+        </li>
+    </ul>
+</head>
+<body>
+    <h1>Library Books</h1>
+    <ul>
+        {% for book in books %}
+            <li>{{ book.book_name }} by {{ book.book_author }} ({{ book.book_year }})</li>
+        {% empty %}
+            <li>No books found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
