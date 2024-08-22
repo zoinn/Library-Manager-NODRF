@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
      <form method="POST" action="{% url 'login' %}">

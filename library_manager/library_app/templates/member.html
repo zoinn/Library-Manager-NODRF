@@ -6,13 +6,13 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <ul>
-        <li><a href="{% url 'library' %}">Library</a></li>
-        <li><a href="{% url 'member' %}">Members</a></li>
+        <li><a href="{% url 'library' %}" class="nav-button">Library</a></li>
+        <li><a href="{% url 'member' %}" class="nav-button">Members</a></li>
         <!-- Uses a form to logout, as we need to do a POST to logout -->
         <li>
             <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
-            <button type="submit">Logout</button>
+            <button type="submit" class="nav-button">Logout</button>
             </form>
         </li>
     </ul>

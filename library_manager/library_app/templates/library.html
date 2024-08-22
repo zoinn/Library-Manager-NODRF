@@ -6,13 +6,13 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <title>Library</title>
     <ul>
-        <li><a href="{% url 'library' %}">Library</a></li>
-        <li><a href="{% url 'member' %}">Members</a></li>
+        <li><a href="{% url 'library' %}" class="nav-button">Library</a></li>
+        <li><a href="{% url 'member' %}" class="nav-button">Members</a></li>
         <!-- Uses a form to logout, as we need to do a POST to logout -->
         <li>
             <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
-            <button type="submit">Logout</button>
+            <button type="submit" class="nav-button">Logout</button>
             </form>
         </li>
     </ul>
@@ -26,12 +26,13 @@
             <li>No books found.</li>
         {% endfor %}
     </ul>
-    <div>
+    <h2>Books Due:</h2>
+    <ul>
         {% for book in borrowedBooks %}
             <li>{{ book.book_name }} by {{ book.book_author }} ({{ book.book_year }}) due {{book.book_return_date}}</li>
         {% empty %}
             <li>Not currently borrowing books</li>
         {% endfor %}
-    </div>
+    </ul>
 </body>
 </html>
