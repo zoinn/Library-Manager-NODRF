@@ -13,5 +13,11 @@
         <input type="password" id="password" name="password"><br><br>
         <input type="submit" value="Submit">
      </form>
+
+    {% if error_message %}
+    <div id="popup" class="popup active">
+        {{ error_message }}
+    </div>
+    {% endif %}
 </body>
 </html>

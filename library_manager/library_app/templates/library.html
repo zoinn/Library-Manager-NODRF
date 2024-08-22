@@ -21,10 +21,17 @@
     <h1>Library Books</h1>
     <ul>
         {% for book in books %}
-            <li>{{ book.book_name }} by {{ book.book_author }} ({{ book.book_year }})</li>
+            <li>{{ book.book_name }} by {{ book.book_author }} ({{ book.book_year }}) Borrowed: {{book.book_borrowed}}</li>
         {% empty %}
             <li>No books found.</li>
         {% endfor %}
     </ul>
+    <div>
+        {% for book in borrowedBooks %}
+            <li>{{ book.book_name }} by {{ book.book_author }} ({{ book.book_year }}) due {{book.book_return_date}}</li>
+        {% empty %}
+            <li>Not currently borrowing books</li>
+        {% endfor %}
+    </div>
 </body>
 </html>
