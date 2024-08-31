@@ -20,15 +20,22 @@
 <body>
     <h1>Library Books</h1>
     <ul>
-        {% for book in books %}
-            <li>{{ book.book_name }} by {{ book.book_author }} ({{ book.book_year }}) Borrowed: {{book.book_borrowed}}</li>
+        <h2>Books In Library:</h2>
+        {% for book in booksInLibrary %}
+        <li>{{ book.book_name }} by {{ book.book_author }} ({{ book.book_year }}) <a href="{% url 'borrow' %}?bookname={{ book.book_name|urlencode }}" class="borrow">Borrow</a></li>
+        {% empty %}
+            <li>No books found.</li>
+        {% endfor %}
+        <h2>Books With Members:</h2>
+        {% for book in bookswithMembers %}
+        <li>{{ book.book_name }} by {{ book.book_author }} ({{ book.book_year }})</li>
         {% empty %}
             <li>No books found.</li>
         {% endfor %}
     </ul>
-    <h2>Books Due:</h2>
+    <h2>Books Held:</h2>
     <ul>
-        {% for book in borrowedBooks %}
+        {% for book in userborrowedBooks %}
             <li>{{ book.book_name }} by {{ book.book_author }} ({{ book.book_year }}) due {{book.book_return_date}}</li>
         {% empty %}
             <li>Not currently borrowing books</li>

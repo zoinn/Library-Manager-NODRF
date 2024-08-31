@@ -16,7 +16,6 @@ body {
     padding: 20px;
 }
 
-/* Navigation styles */
 ul {
     list-style: none;
     padding: 0;
@@ -41,13 +40,11 @@ form {
     display: inline;
 }
 
-/* Header styles */
 h1 {
     font-size: 2rem;
     margin-bottom: 20px;
 }
 
-/* List styles */
 ul li {
     padding: 10px;
     border-bottom: 1px solid #ddd;
@@ -57,7 +54,6 @@ ul li:last-child {
     border-bottom: none;
 }
 
-/* Form styling */
 form label {
     display: block;
     margin-bottom: 5px;
@@ -124,14 +120,23 @@ button {
     font-weight: bold;
 }
 
-/* Additional button styling to match link */
 button.nav-button {
-    background-color: transparent; /* Match link background */
-    color: #007bff; /* Match link color */
-    font-weight: bold; /* Match link font weight */
+    background-color: transparent;
+    color: #007bff;
+    font-weight: bold;
 }
 
 .nav-button:hover {
-    color: #0056b3; /* Match link hover color */
-    text-decoration: underline; /* Match link hover effect */
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+button.borrow {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    margin-left: 5px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
 }
