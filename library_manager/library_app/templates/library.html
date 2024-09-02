@@ -19,10 +19,56 @@
 </head>
 <body>
     <h1>Library Books</h1>
+    {% if request.session.is_admin %}
+        <h2>Admin Library Actions:</h2>
+        <button id="openAddModalBtn" class="bookaction btn-primary">Add Book</button>
+        <button id="openDelModalBtn" class="bookaction btn-primary">Delete Book</button>
+    {% endif %}
+
+    <div id="addBookModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add a New Book</h2>
+            <form id="addBookForm" method="POST" action="{% url 'addbook' %}">
+                {% csrf_token %}
+                <label for="book_name">Book Name:</label>
+                <input type="text" id="book_name" name="book_name" required><br>
+                <label for="book_author">Author:</label>
+                <input type="text" id="book_author" name="book_author" required><br>
+                <label for="book_year">Year:</label>
+                <input type="number" id="book_year" name="book_year" class="bookyear" required><br>
+                <button type="submit" class="bookaction btn-primary">Add Book</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="delBookModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Delete a Book</h2>
+            <form id="delBookForm" method="POST" action="{% url 'delbook' %}">
+                {% csrf_token %}
+                <select id="bookDropdown" onchange="updateHiddenFields()">
+                    {% for book in allBooks %}
+                        <option data-name="{{ book.book_name }}" data-author="{{ book.book_author }}" data-year="{{ book.book_year }}">
+                            {{ book.book_name }} by {{ book.book_author }} ({{ book.book_year }})
+                        </option>
+                    {% empty %}
+                    <p>No books found.</p>
+                    {% endfor %}
+                </select>
+                <input type="hidden" id="hiddenBookName" name="book_name">
+                <input type="hidden" id="hiddenBookAuthor" name="book_author">
+                <input type="hidden" id="hiddenBookYear" name="book_year">
+                <button type="submit" class="bookaction btn-primary">Delete Book</button>
+            </form>
+        </div>
+    </div>
+
     <ul>
         <h2>Books In Library:</h2>
         {% for book in booksInLibrary %}
-        <li>{{ book.book_name }} by {{ book.book_author }} ({{ book.book_year }}) <a href="{% url 'borrow' %}?bookname={{ book.book_name|urlencode }}" class="borrow">Borrow</a></li>
+        <li>{{ book.book_name }} by {{ book.book_author }} ({{ book.book_year }}) <a href="{% url 'borrow' %}?bookname={{ book.book_name|urlencode }}" class="bookaction">Borrow</a></li>
         {% empty %}
             <li>No books found.</li>
         {% endfor %}
@@ -36,10 +82,11 @@
     <h2>Books Held:</h2>
     <ul>
         {% for book in userborrowedBooks %}
-            <li>{{ book.book_name }} by {{ book.book_author }} ({{ book.book_year }}) due {{book.book_return_date}}</li>
+            <li>{{ book.book_name }} by {{ book.book_author }} ({{ book.book_year }}) due {{book.book_return_date}} <a href="{% url 'return' %}?bookname={{ book.book_name|urlencode }}" class="bookaction">Return</a></li>
         {% empty %}
             <li>Not currently borrowing books</li>
         {% endfor %}
     </ul>
+    <script src="{% static 'js/library.js' %}" defer></script>
 </body>
 </html>

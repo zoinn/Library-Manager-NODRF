@@ -11,5 +11,8 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('library/', library, name='library'),
     path('library/borrow/', views.borrowBook, name='borrow'),
+    path('library/return/', views.returnBook, name='return'),
+    path('library/addbook/', views.addBook, name='addbook'),
+    path('library/delbook/', views.delBook, name='delbook'),
     path('member/', member, name='member'),
 ]
