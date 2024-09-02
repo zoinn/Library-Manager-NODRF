@@ -19,3 +19,6 @@ A version of my library manager that is django only using FBV's and no django-re
 - Session based authentication
 - Stylesheets with templates
 - Working with postgresql and django
+- Static files
+- CRUD operations in django
+- Admin only actions/hidden html
